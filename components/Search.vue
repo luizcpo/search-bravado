@@ -80,4 +80,8 @@ export default {
 
     &:focus
         border: none
+
+@media screen and (max-width: 768px)
+  .search
+    margin: 0 auto
 </style>

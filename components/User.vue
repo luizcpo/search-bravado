@@ -32,6 +32,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+$font-size-small: 13px
+
 .user
   position: relative
   flex: 1
@@ -68,7 +70,7 @@ export default {
     border: 1px solid rgba(0, 0, 0, 0.12)
     margin: 1.5px 0 14.5px 0
   
-  .email
+  span.email
     position: absolute
     top: 10px
     right: 9px
@@ -83,6 +85,7 @@ export default {
     height: 136px
     margin-right: 27px
     border-radius: 3px 0 0 3px
+    background: rgba(0, 0, 0, 0.25)
 
   a.action
     text-decoration: none
@@ -91,4 +94,37 @@ export default {
     line-height: 16px
     color: #009688
     margin-left: 5px
-</style>
+  
+  @media screen and (max-width: 768px)
+    img
+      margin-right: 12px
+    
+    h3.name
+      font-size: 18px
+      line-height: 18px
+      margin-top: 22px
+    
+    p.title
+      font-size: $font-size-small
+      line-height: $font-size-small
+
+    p.address
+      font-size: $font-size-small
+      line-height: $font-size-small
+    
+    span.email
+      font-size: $font-size-small
+      line-height: $font-size-small
+      top: 3px
+      right: 3px
+    
+    hr
+      margin: 1.5px 0 4.5px 0
+
+    a.action
+      font-size: $font-size-small
+      line-height: $font-size-small
+
+
+    
+  </style>
