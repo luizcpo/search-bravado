@@ -43,9 +43,10 @@ export default {
       }
     }
   },
-  created(){
-    if(this.$route.path.lenth > 1){
-      this.query = this.$route.path
+  mounted(){
+    const path = this.$route.path.replaceAll("/","").replaceAll("-", " ")
+    if(path){
+      this.query = path
     }
   }
 }
