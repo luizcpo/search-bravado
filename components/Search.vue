@@ -1,7 +1,7 @@
 <template>
     <div class="search">
         <input id="search-box" type="text" v-model="query">
-        <virtual-list style="height: 785px; overflow-y: auto;"
+        <virtual-list style="height: 471px; overflow-y: auto;"
               :data-key="'email'"
               :data-sources="resultUsers"
               :data-component="userComponent"
@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import users_json from 'static/users.json'
-import User from './User'
+import users_json from '@/static/users.json'
+import User from '@/components/User'
 import VirtualList from 'vue-virtual-scroll-list'
 
 export default {

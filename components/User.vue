@@ -3,7 +3,7 @@
     <img v-bind:src="source.avatar" />
     <h3 class="name" v-html="highlights(source.name)"></h3>
     <p class="title" v-html="highlights(source.title)"></p>
-    <p class="address" v-html="highlights(source.address)"></p>
+    <p class="address" v-html="highlights(source.address+', '+source.city)"></p>
     <span class="email" v-html="highlights(source.email)"></span>
     <hr />
     <a class="action" href="#"> SKIP SELECTION</a>
@@ -124,7 +124,4 @@ $font-size-small: 13px
     a.action
       font-size: $font-size-small
       line-height: $font-size-small
-
-
-    
   </style>
