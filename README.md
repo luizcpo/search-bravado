@@ -1,4 +1,6 @@
-# search
+# Search Bravado
+
+This is a test assessment for a simple live search engine on front end.
 
 ## Build Setup
 
@@ -17,4 +19,8 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## TO DO
+Implementing tests for the Search.vue component.
+
+## Live Demo
+This app is published on https://search-bravado.herokuapp.com/.
