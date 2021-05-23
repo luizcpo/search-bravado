@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     highlights(text){
-      if(this.query) {
+      if(this.query != "") {
         var iQuery = new RegExp(this.query, "ig")
         return text.replace(iQuery, function(matchedTxt,a,b){
           return ('<span class=\'highlight\'>' + matchedTxt + '</span>')

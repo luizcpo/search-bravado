@@ -1,17 +1,17 @@
 <template>
     <div class="search">
         <input id="search-box" type="text" v-model="query">
-        <virtual-list style="height: 471px; overflow-y: auto;"
+        <User v-for="user in users" :source="user" :key="user.email" />
+        <!-- <virtual-list style="height: 471px; overflow-y: auto;"
               :data-key="'email'"
-              :data-sources="resultUsers"
+              :data-sources="users || []"
               :data-component="userComponent"
               :extra-props="{ query: query }"
-            />
+            /> -->
     </div>
 </template>
 
 <script>
-import users_json from '@/static/users.json'
 import User from '@/components/User'
 import VirtualList from 'vue-virtual-scroll-list'
 
@@ -19,10 +19,10 @@ export default {
   data() {
     return {
       userComponent: User,
-      users: users_json,
       query: ""
     }
   },
+  props: ['query'],
   components: { 'virtual-list': VirtualList },
   computed: {
     resultUsers() {
@@ -43,11 +43,11 @@ export default {
       }
     }
   },
-  mounted(){
-    const path = this.$route.path.replaceAll("/","").replaceAll("-", " ")
-    if(path){
-      this.query = path
-    }
+  async asyncData({$axios}) {
+    const response = await $axios.get('http://localhost:3010/');
+    const users = response.data.data;
+
+    return users
   }
 }
 </script>
