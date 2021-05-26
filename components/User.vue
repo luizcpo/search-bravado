@@ -6,7 +6,7 @@
     <p class="address" v-html="highlights(source.address+', '+source.city)"></p>
     <span class="email" v-html="highlights(source.email)"></span>
     <hr />
-    <a class="action" href="#"> SKIP SELECTION</a>
+    <a class="action" href="#">SKIP SELECTION</a>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     highlights(text){
-      if(this.query) {
+      if(this.query != "") {
         var iQuery = new RegExp(this.query, "ig")
         return text.replace(iQuery, function(matchedTxt,a,b){
           return ('<span class=\'highlight\'>' + matchedTxt + '</span>')

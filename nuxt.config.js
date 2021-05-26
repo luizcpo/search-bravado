@@ -15,16 +15,6 @@ export default {
     ]
   },
 
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
-    }
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'assets/css/styles'
@@ -43,7 +33,14 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    baseURL: 'http://localhost:3010', // Used as fallback if no runtime config is provided
+    proxyHeaders: false,
+    credentials: false
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

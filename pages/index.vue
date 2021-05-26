@@ -1,7 +1,11 @@
 <template>
-   <Search />
+  <Search />
 </template>
 
 <script>
-export default {}
+export default {
+  async fetch({ store }) {
+    await store.dispatch('loadAndSortUsers');
+  }
+}
 </script>

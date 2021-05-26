@@ -1,30 +1,32 @@
 <template>
     <div class="search">
         <input id="search-box" type="text" v-model="query">
-        <virtual-list style="height: 471px; overflow-y: auto;"
-              :data-key="'email'"
-              :data-sources="resultUsers"
-              :data-component="userComponent"
-              :extra-props="{ query: query }"
-            />
+        <RecycleScroller
+          class="scroller"
+          :items="resultUsers"
+          :item-size="157"
+          key-field="email"
+          v-slot="{ item }"
+        >
+          <User :source="item" :query="query" />
+        </RecycleScroller>
     </div>
 </template>
 
 <script>
-import users_json from '@/static/users.json'
-import User from '@/components/User'
-import VirtualList from 'vue-virtual-scroll-list'
+import { mapState } from 'vuex'
+import { RecycleScroller } from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 export default {
-  data() {
+  data: function() {
     return {
-      userComponent: User,
-      users: users_json,
       query: ""
     }
   },
-  components: { 'virtual-list': VirtualList },
+  components: { RecycleScroller },
   computed: {
+    ...mapState(['users']),
     resultUsers() {
       if(this.query) { 
         return this.users.filter(user => 
@@ -33,26 +35,14 @@ export default {
           user.email.toLowerCase().includes(this.query.toLowerCase()) ||
           user.address.toLowerCase().includes(this.query.toLowerCase()) ||
           user.city.toLowerCase().includes(this.query.toLowerCase())
-        ).sort((a, b) =>{
-          if(a.name < b.name) { return -1; }
-          if(a.name > b.name) { return 1; }
-          return 0;
-        })
+        )
       } else {
         return this.users
       }
     }
-  },
-  mounted(){
-    const path = this.$route.path.replaceAll("/","").replaceAll("-", " ")
-    if(path){
-      this.query = path
-    }
   }
 }
 </script>
-
-
 
 <style lang="sass" scoped>
 .search
@@ -62,6 +52,9 @@ export default {
   max-width: 564px
   margin: 50px auto
   padding: 0 12px
+
+  .scroller
+    height: 628px
 
   input#search-box
     background: url(assets/img/search-icon.png) 15px 17px no-repeat
