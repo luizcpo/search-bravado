@@ -6,7 +6,7 @@
     <p class="address" v-html="highlights(source.address+', '+source.city)"></p>
     <span class="email" v-html="highlights(source.email)"></span>
     <hr />
-    <a class="action" href="#"> SKIP SELECTION</a>
+    <a class="action" href="#">SKIP SELECTION</a>
   </div>
 </template>
 

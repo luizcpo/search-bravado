@@ -3,7 +3,7 @@
         <input id="search-box" type="text" v-model="query">
         <RecycleScroller
           class="scroller"
-          :items="users"
+          :items="resultUsers"
           :item-size="157"
           key-field="email"
           v-slot="{ item }"
@@ -16,16 +16,36 @@
 <script>
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import User from '@/components/User'
-// import VirtualList from 'vue-virtual-scroll-list'
 import { RecycleScroller } from 'vue-virtual-scroller'
 
 export default {
   async asyncData({ $axios }) {
-    const users = await $axios.$get('http://localhost:3010')
-
+    let users = await $axios.$get('https://bravado-users-api.herokuapp.com/')
+    
+    users = users.sort((a, b) =>{
+          if(a.name < b.name) { return -1; }
+          if(a.name > b.name) { return 1; }
+          return 0;
+    })
+    
     return { users, query: "", userComponent: User }
   },
-  components: { RecycleScroller }
+  components: { RecycleScroller },
+  computed: {
+    resultUsers() {
+      if(this.query) { 
+        return this.users.filter(user => 
+          user.name.toLowerCase().includes(this.query.toLowerCase()) ||
+          user.title.toLowerCase().includes(this.query.toLowerCase()) ||
+          user.email.toLowerCase().includes(this.query.toLowerCase()) ||
+          user.address.toLowerCase().includes(this.query.toLowerCase()) ||
+          user.city.toLowerCase().includes(this.query.toLowerCase())
+        )
+      } else {
+        return this.users
+      }
+    }
+  }
 }
 </script>
 
