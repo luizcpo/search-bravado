@@ -1,5 +1,5 @@
 <template>
-   <nuxt-link to="/">Home</nuxt-link>
+   <h1>{{ this.$route.params.query }}</h1>
 </template>
 
 <script>
