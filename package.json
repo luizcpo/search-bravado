@@ -1,5 +1,6 @@
 {
   "name": "search",
+  "author": "Luiz Oliveira",
   "version": "1.0.0",
   "private": true,
   "scripts": {
